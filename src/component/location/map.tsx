@@ -151,12 +151,26 @@ const NaverMap = () => {
             switch (checkDevice()) {
               case "ios":
               case "android": {
-                const params = new URLSearchParams({
-                  goalx: EVENT_LOCATION_POSITION[0].toString(),
-                  goaly: EVENT_LOCATION_POSITION[1].toString(),
-                  goalName: LOCATION,
-                })
-                window.open(`tmap://route?${params.toString()}`, "_self")
+                try {
+                  const params = new URLSearchParams({
+                    goalx: EVENT_LOCATION_POSITION[0].toString(),
+                    goaly: EVENT_LOCATION_POSITION[1].toString(),
+                    goalName: LOCATION,
+                  })
+                  window.open(`tmap://route?${params.toString()}`, "_self")
+                } catch (e) {
+                  if (checkDevice() === "ios") {
+                    window.open(
+                      "https://apps.apple.com/us/app/t-map-for-public-transport/id435426918",
+                      "_blank",
+                    )
+                  } else {
+                    window.open(
+                      "https://play.google.com/store/apps/details?id=com.skt.tmap.ku",
+                      "_blank",
+                    )
+                  }
+                }
                 break
               }
               default: {

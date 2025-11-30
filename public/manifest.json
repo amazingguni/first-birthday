@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "short_name": "<%= TITLE %>",
+    "name": "<%= TITLE %>",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+    "display": "standalone",
+    "theme_color": "#f9f9f9",
+    "background_color": "#ffe7e7"
 }
