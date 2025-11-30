@@ -148,20 +148,11 @@ const NaverMap = () => {
         </button>
         <button
           onClick={() => {
-            const device = checkDevice()
-            alert(device)
-            switch (device) {
+            switch (checkDevice()) {
               case "ios":
               case "android": {
-                try {
-                  const params = new URLSearchParams({
-                    goalx: EVENT_LOCATION_POSITION[0].toString(),
-                    goaly: EVENT_LOCATION_POSITION[1].toString(),
-                    goalName: LOCATION,
-                  })
-                  window.open(`tmap://route?${params.toString()}`, "_self")
-                } catch (e) {
-                  if (device === "ios") {
+                const timeout = setTimeout(() => {
+                  if (checkDevice() === "ios") {
                     window.open(
                       "https://apps.apple.com/us/app/t-map-for-public-transport/id435426918",
                       "_blank",
@@ -172,7 +163,22 @@ const NaverMap = () => {
                       "_blank",
                     )
                   }
-                }
+                }, 2000)
+
+                const params = new URLSearchParams({
+                  goalx: EVENT_LOCATION_POSITION[0].toString(),
+                  goaly: EVENT_LOCATION_POSITION[1].toString(),
+                  goalName: LOCATION,
+                })
+                window.open(`tmap://route?${params.toString()}`, "_self")
+
+                // Add a visibility change listener to clear the timeout if the app opens
+                document.addEventListener("visibilitychange", () => {
+                  if (document.visibilityState === "hidden") {
+                    clearTimeout(timeout)
+                  }
+                })
+
                 break
               }
               default: {
