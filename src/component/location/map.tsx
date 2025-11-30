@@ -148,7 +148,9 @@ const NaverMap = () => {
         </button>
         <button
           onClick={() => {
-            switch (checkDevice()) {
+            const device = checkDevice()
+            alert(device)
+            switch (device) {
               case "ios":
               case "android": {
                 try {
@@ -159,7 +161,7 @@ const NaverMap = () => {
                   })
                   window.open(`tmap://route?${params.toString()}`, "_self")
                 } catch (e) {
-                  if (checkDevice() === "ios") {
+                  if (device === "ios") {
                     window.open(
                       "https://apps.apple.com/us/app/t-map-for-public-transport/id435426918",
                       "_blank",
