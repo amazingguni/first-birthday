@@ -4,10 +4,11 @@
 
 https://amazingguni.github.io/first-birthday
 
+https://github.com/juhonamnam/wedding-invitation 를 fork해서 만들었습니다.
 
 ## 개요
 
-React로 제작된 모던한 모바일 청첩장 웹사이트 템플릿입니다. 깔끔한 디자인을 특징으로 하며, 손쉽게 커스터마이징하여 자신만의 청첩장으로 만들 수 있습니다.
+React로 제작된 모던한 모바일 돌잔치 초대장 웹사이트 템플릿입니다. 깔끔한 디자인을 특징으로 하며, 손쉽게 커스터마이징하여 자신만의 초대장으로 만들 수 있습니다.
 
 ## 주요 기능
 
@@ -16,10 +17,8 @@ React로 제작된 모던한 모바일 청첩장 웹사이트 템플릿입니다
 - 🚀 GitHub Pages 간편 배포
 - 다양한 기능 지원
   - 🎞️ 이미지 갤러리
-  - 🗺️ 웨딩홀 위치 지도 표시
-  - 💌 방명록
+  - 🗺️ 돌잔치 장소 지도 표시
   - 💬 카카오톡 공유
-  - 🎯 참석 의사 전달
 
 ## 사전 요구사항
 
@@ -49,19 +48,11 @@ cp .env.example .env
 ```
 
 - `VITE_NAVER_MAP_CLIENT_ID`
-  - 웨딩홀 위치를 표시하기 위한 네이버 지도 API 키
+  - 돌잔치 장소 위치를 표시하기 위한 네이버 지도 API 키
   - Naver Cloud Platform에서 발급 가능 (Dynamic Map API)
 - `VITE_KAKAO_SDK_JS_KEY`
   - 카카오톡 공유하기 기능을 위한 KAKAO SDK 키
   - Kakao Developers에서 발급 가능 (JavaScript Key)
-- `VITE_SERVER_URL`
-  - 방명록과 참석 의사 전달 등을 위한 서버의 URL
-  - 서버 소스코드: https://github.com/juhonamnam/wedding-invitation-server
-  - 설정하지 않을 경우 소스코드상에 고정된 방명록만 보여줍니다.
-    - 결혼식 끝난 이후 archive 용으로 사용 가능합니다. 지금까지 올라왔던 모든 방명록을 `offlineGuestBook.json`에 소스코드로 저장하여 read only로 보관해보세요.
-- `VITE_STATIC_ONLY`
-  - 방명록과 참석 의사 전달 기능은 별도의 서버를 호스팅해야 합니다.
-  - 이 기능을 사용하지 않고 정적 웹사이트로만 운영하려면 이 환경변수를 `true`로 설정합니다.
 
 4. 개발 서버 실행:
 
@@ -71,18 +62,18 @@ npm run dev
 
 ## 커스터마이징
 
-1. `src/const.ts` 파일에서 웨딩 정보 수정:
-   - 신랑 신부 이름
-   - 결혼식 날짜
-   - 예식장 위치
-   - 연락처 및 축의금 계좌 정보
+1. `src/const.ts` 파일에서 돌잔치 정보 수정:
+   - 아기 이름
+   - 돌잔치 날짜
+   - 돌잔치 장소 위치
+   - 연락처 정보
 
 2. 이미지 교체
    - `src/images`: 표지 이미지 및 갤러리 이미지
    - `public/preview_image.png`: SNS 공유용 미리보기 이미지
 
 3. 글귀 수정
-   - `src/component/location`: 예식장 위치 관련 글귀 수정
+   - `src/component/location`: 돌잔치 장소 관련 글귀 수정
    - `src/component/information`: 식사 안내 글귀 수정
    - 그 외 컴포넌트 디렉토리에서 관련 글귀 수정 가능
 
@@ -106,9 +97,6 @@ npm run dev
    - Secrets:
      - `VITE_NAVER_MAP_CLIENT_ID`
      - `VITE_KAKAO_SDK_JS_KEY`
-   - Variables:
-     - `VITE_SERVER_URL`
-     - `VITE_STATIC_ONLY`
 
 ### 다른 호스팅 플랫폼
 
@@ -143,3 +131,14 @@ npm run build
 - TypeScript의 타입 에러 수정
 - 웨딩 날짜 포맷 수정 (분 단위가 존재하는 경우 분 단위도 표시하도록 수정)
 - `src/const.ts`에 사용법 주석 추가
+
+### 2025.11.30 - v0.1.2
+
+- [Bugfix] 티맵 버튼 모바일에서 클릭되지 않던 문제 수정 (앱 미설치 시 앱스토어 리디렉션)
+- [Feature] `bgEffect` 꽃잎 효과를 눈 내리는 효과로 변경
+  - 눈송이 크기 2배 증가
+  - 갤러리 위에 눈 효과 표시 및 터치 이벤트 보장
+- [Improvement] 갤러리 이미지 파일 포맷 `.png`에서 `.jpg`로 변경 및 이미지 최적화
+  - `src/images/gallery`의 `.jpg` 파일들을 동적으로 사용하도록 변경
+  - 모바일 환경 로딩 속도 개선을 위해 이미지 용량 최적화 (가로 1080px, 품질 80%)
+  - `300_5.jpg` 이미지 왼쪽으로 90도 회전
