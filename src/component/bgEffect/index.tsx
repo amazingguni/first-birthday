@@ -1,20 +1,21 @@
 import { useEffect, useRef } from "react"
-import patelUrl from "../../icons/petal.png"
 
-const X_SPEED = 0.6
-const X_SPEED_VARIANCE = 0.8
+const X_SPEED = 0.1
+const X_SPEED_VARIANCE = 0.5
 
-const Y_SPEED = 0.4
-const Y_SPEED_VARIANCE = 0.4
+const Y_SPEED = 1
+const Y_SPEED_VARIANCE = 0.5
 
-const FLIP_SPEED_VARIANCE = 0.02
+const SIZE = 6
+const SIZE_VARIANCE = 4
 
-// Petal class
-class Petal {
+const FLIP_SPEED_VARIANCE = 0.005
+
+// Snowflake class
+class Snowflake {
   x: number
   y: number
-  w: number = 0
-  h: number = 0
+  size: number = 0
   opacity: number = 0
   flip: number = 0
   xSpeed: number = 0
@@ -24,7 +25,6 @@ class Petal {
   constructor(
     private canvas: HTMLCanvasElement,
     private ctx: CanvasRenderingContext2D,
-    private petalImg: HTMLImageElement,
   ) {
     this.x = Math.random() * canvas.width
     this.y = Math.random() * canvas.height * 2 - canvas.height
@@ -33,37 +33,32 @@ class Petal {
   }
 
   initialize() {
-    this.w = 25 + Math.random() * 15
-    this.h = 20 + Math.random() * 10
-    this.opacity = this.w / 80
-    this.flip = Math.random()
+    this.size = SIZE + Math.random() * SIZE_VARIANCE
+    this.opacity = this.size / (SIZE + SIZE_VARIANCE + 5) // Adjust opacity based on size
+    this.flip = Math.random() * Math.PI * 2 // Initial random rotation
 
-    this.xSpeed = X_SPEED + Math.random() * X_SPEED_VARIANCE
+    this.xSpeed = X_SPEED + Math.random() * X_SPEED_VARIANCE * (Math.random() < 0.5 ? 1 : -1) // Random horizontal drift
     this.ySpeed = Y_SPEED + Math.random() * Y_SPEED_VARIANCE
-    this.flipSpeed = Math.random() * FLIP_SPEED_VARIANCE
+    this.flipSpeed = Math.random() * FLIP_SPEED_VARIANCE * (Math.random() < 0.5 ? 1 : -1) // Random rotation speed
   }
 
   draw() {
-    if (this.y > this.canvas.height || this.x > this.canvas.width) {
+    if (this.y > this.canvas.height || this.x < -this.size || this.x > this.canvas.width + this.size) {
       this.initialize()
 
-      const rand = Math.random() * (this.canvas.width + this.canvas.height)
-      if (rand > this.canvas.width) {
-        this.x = 0
-        this.y = rand - this.canvas.width
-      } else {
-        this.x = rand
-        this.y = 0
-      }
+      // Reset position to top with some randomness
+      this.x = Math.random() * this.canvas.width
+      this.y = -this.size
     }
-    this.ctx.globalAlpha = this.opacity
-    this.ctx.drawImage(
-      this.petalImg,
-      this.x,
-      this.y,
-      this.w * (0.6 + Math.abs(Math.cos(this.flip)) / 3),
-      this.h * (0.8 + Math.abs(Math.sin(this.flip)) / 5),
-    )
+
+    this.ctx.save()
+    this.ctx.translate(this.x, this.y)
+    this.ctx.rotate(this.flip)
+    this.ctx.beginPath()
+    this.ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2) // Draw a circle for snowflake
+    this.ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`
+    this.ctx.fill()
+    this.ctx.restore()
   }
 
   animate() {
@@ -77,7 +72,7 @@ class Petal {
 export const BGEffect = () => {
   const ref = useRef<HTMLCanvasElement>({} as HTMLCanvasElement)
 
-  const petalsRef = useRef<Petal[]>([])
+  const snowflakesRef = useRef<Snowflake[]>([])
 
   const resizeTimeoutRef = useRef(0)
   const animationFrameIdRef = useRef(0)
@@ -90,27 +85,24 @@ export const BGEffect = () => {
 
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D
 
-    const petalImg = new Image()
-    petalImg.src = patelUrl
-
-    const getPetalNum = () => {
-      return Math.floor((window.innerWidth * window.innerHeight) / 30000)
+    const getSnowflakeNum = () => {
+      return Math.floor((window.innerWidth * window.innerHeight) / 10000) // More snowflakes for a snow effect
     }
 
-    const initializePetals = () => {
-      const count = getPetalNum()
-      const petals = []
+    const initializeSnowflakes = () => {
+      const count = getSnowflakeNum()
+      const snowflakes = []
       for (let i = 0; i < count; i++) {
-        petals.push(new Petal(canvas, ctx, petalImg))
+        snowflakes.push(new Snowflake(canvas, ctx))
       }
-      petalsRef.current = petals
+      snowflakesRef.current = snowflakes
     }
 
-    initializePetals()
+    initializeSnowflakes()
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      petalsRef.current.forEach((petal) => petal.animate())
+      snowflakesRef.current.forEach((snowflake) => snowflake.animate())
       animationFrameIdRef.current = requestAnimationFrame(render)
     }
 
@@ -121,13 +113,13 @@ export const BGEffect = () => {
       resizeTimeoutRef.current = window.setTimeout(() => {
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
-        const newPetalNum = getPetalNum()
-        if (newPetalNum > petalsRef.current.length) {
-          for (let i = petalsRef.current.length; i < newPetalNum; i++) {
-            petalsRef.current.push(new Petal(canvas, ctx, petalImg))
+        const newSnowflakeNum = getSnowflakeNum()
+        if (newSnowflakeNum > snowflakesRef.current.length) {
+          for (let i = snowflakesRef.current.length; i < newSnowflakeNum; i++) {
+            snowflakesRef.current.push(new Snowflake(canvas, ctx))
           }
-        } else if (newPetalNum < petalsRef.current.length) {
-          petalsRef.current.splice(newPetalNum)
+        } else if (newSnowflakeNum < snowflakesRef.current.length) {
+          snowflakesRef.current.splice(newSnowflakeNum)
         }
       }, 100)
     }
