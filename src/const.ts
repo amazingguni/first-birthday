@@ -25,7 +25,7 @@ export const SHARE_ADDRESS = LOCATION
 export const SHARE_ADDRESS_TITLE = LOCATION
 
 // 네이버 지도 및 카카오 네비게이션에 사용할 좌표. [경도, 위도] 형식.
-export const EVENT_LOCATION_POSITION = [37.343721, 127.061298]
+export const EVENT_LOCATION_POSITION = [127.061298, 37.343721]
 
 // 네이버 지도의 웨딩홀 장소 ID
 // 네이버 지도 웹페이지에서 웨딩홀 검색 후 URL에서 확인 가능.
