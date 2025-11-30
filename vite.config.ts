@@ -25,7 +25,7 @@ try {
   base = pkg.homepage || "/"
 }
 
-const TITLE = `${FATHER_NAME}·${MOTHER_NAME}의 아기 ${BABY_NAME}의 첫 번째 생일`
+const TITLE = `${FATHER_NAME}·${MOTHER_NAME}의 딸 ${BABY_NAME}의 첫 번째 생일`
 
 // https://vite.dev/config/
 export default defineConfig({

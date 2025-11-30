@@ -2,7 +2,7 @@ import {
   BABY_NAME,
   FATHER_NAME,
   MOTHER_NAME,
-  LOCATION,
+  LOCATION_ADDRESS,
   EVENT_DATE,
   EVENT_DATE_FORMAT,
 } from "../../const"
@@ -40,7 +40,7 @@ export const Cover = () => {
         {FATHER_NAME} · {MOTHER_NAME}의 딸 {BABY_NAME}
       </div>
       <div className="info">{EVENT_DATE.format(EVENT_DATE_FORMAT)}</div>
-      <div className="info">{LOCATION}</div>
+      <div className="info">{LOCATION_ADDRESS}</div>
     </LazyDiv>
   )
 }

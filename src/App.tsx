@@ -36,14 +36,7 @@ function App() {
           {/* 오시는길 */}
           <Location />
         </LazyDiv>
-
-        <LazyDiv className="card-group">
-          {/* 마음 전하기 */}
-          <Information />
-          {/* 방명록 */}
-          {!STATIC_ONLY && <GuestBook />}
-        </LazyDiv>
-
+        
         <ShareButton />
       </div>
     </div>

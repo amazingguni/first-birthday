@@ -16,7 +16,7 @@ export const EVENT_DATE_FORMAT = `YYYY년 MMMM D일 dddd A h시${EVENT_DATE.minu
 // 예: 예식일 8월 -> 8월 15일 광복절
 export const HOLIDAYS = [1]
 
-export const LOCATION = "경기도 용인시 수지구 동천로 411 오월식당 2층"
+export const LOCATION = "오월식당 2층"
 export const LOCATION_ADDRESS = "경기도 용인시 수지구 동천로 411 오월식당 2층"
 
 // 카카오톡 공유 시 위치 정보로 사용할 주소.
