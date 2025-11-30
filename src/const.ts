@@ -51,7 +51,7 @@ export const FAMILY_INFO = [
   {
     relation: "엄마",
     name: MOTHER_NAME,
-    phone: "010-0000-0000",
+    phone: "010-9483-8767",
     account: "은행 000000000000",
   },
 ]
