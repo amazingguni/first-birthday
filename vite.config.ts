@@ -6,11 +6,12 @@ import fs from "fs"
 import pkg from "./package.json"
 import { createHtmlPlugin } from "vite-plugin-html"
 import {
-  GROOM_FULLNAME,
-  BRIDE_FULLNAME,
-  WEDDING_DATE,
+  FATHER_NAME,
+  MOTHER_NAME,
+  BABY_NAME,
+  EVENT_DATE,
   LOCATION,
-  WEDDING_DATE_FORMAT,
+  EVENT_DATE_FORMAT,
 } from "./src/const"
 
 const distFolder = "build"
@@ -24,6 +25,8 @@ try {
   base = pkg.homepage || "/"
 }
 
+const TITLE = `${FATHER_NAME}·${MOTHER_NAME}의 아기 ${BABY_NAME}의 첫 번째 생일`
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -32,9 +35,8 @@ export default defineConfig({
     createHtmlPlugin({
       inject: {
         data: {
-          GROOM_FULLNAME,
-          BRIDE_FULLNAME,
-          DESCRIPTION: `${WEDDING_DATE.format(WEDDING_DATE_FORMAT)} ${LOCATION}`,
+          TITLE,
+          DESCRIPTION: `${EVENT_DATE.format(EVENT_DATE_FORMAT)} ${LOCATION}`,
         },
       },
     }),
@@ -43,8 +45,7 @@ export default defineConfig({
       writeBundle() {
         const content = fs.readFileSync("public/manifest.json", "utf-8")
         const processed = content
-          .replace(/<%= GROOM_FULLNAME %>/g, GROOM_FULLNAME)
-          .replace(/<%= BRIDE_FULLNAME %>/g, BRIDE_FULLNAME)
+          .replace(/<%= TITLE %>/g, TITLE)
         fs.writeFileSync(`${distFolder}/manifest.json`, processed)
       },
     },

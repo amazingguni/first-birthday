@@ -1,15 +1,9 @@
 import { Fragment } from "react/jsx-runtime"
 import {
-  BRIDE_FULLNAME,
-  BRIDE_INFO,
-  BRIDE_FATHER,
-  BRIDE_MOTHER,
-  GROOM_FULLNAME,
-  GROOM_INFO,
-  GROOM_FATHER,
-  GROOM_MOTHER,
-  GROOM_TITLE,
-  BRIDE_TITLE,
+  FATHER_NAME,
+  MOTHER_NAME,
+  BABY_NAME,
+  FAMILY_INFO,
 } from "../../const"
 import { useModal } from "../modal"
 import { Button } from "../button"
@@ -25,32 +19,22 @@ export const Invitation = () => {
 
       <div className="break" />
 
-      <div className="content">싱그러운 여름 향기 가득한 날</div>
+      <div className="content">사랑하는 우리 이쁜 현서가</div>
+      <div className="content">태어난 지 어느덧 일 년,</div>
       <div className="content">소중한 분들을 모시고</div>
-      <div className="content">사랑의 약속을 하려고 합니다.</div>
+      <div className="content">첫 생일을 축하하는 자리를 마련했습니다.</div>
       <div className="break" />
-      <div className="content">햇살이 뜨거울 땐 가려주고,</div>
-      <div className="content">비가 오면 우산이 되어주는</div>
-      <div className="content">부부가 되겠습니다.</div>
-      <div className="break" />
-      <div className="content">기쁜날 함께 하시어</div>
-      <div className="content">저희의 앞날을 축복해 주세요.</div>
+      <div className="content">바쁘신 와중에도 귀한 걸음 하시어</div>
+      <div className="content">현서의 첫 시작을 함께 축복해 주세요.</div>
 
       <div className="break" />
 
       <div className="name">
-        {GROOM_FATHER} · {GROOM_MOTHER}
+        {FATHER_NAME} · {MOTHER_NAME}
         <span className="relation">
-          의 <span className="relation-name">{GROOM_TITLE}</span>
+          의 딸
         </span>{" "}
-        {GROOM_FULLNAME}
-      </div>
-      <div className="name">
-        {BRIDE_FATHER} · {BRIDE_MOTHER}
-        <span className="relation">
-          의 <span className="relation-name">{BRIDE_TITLE}</span>
-        </span>{" "}
-        {BRIDE_FULLNAME}
+        {BABY_NAME}
       </div>
 
       <div className="break" />
@@ -71,31 +55,7 @@ export const Invitation = () => {
             content: (
               <>
                 <div className="contact-info">
-                  {GROOM_INFO.filter(({ phone }) => !!phone).map(
-                    ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
-                        <div className="relation">{relation}</div>
-                        <div>{name}</div>
-                        <div>
-                          <PhoneIcon
-                            className="flip icon"
-                            onClick={() => {
-                              window.open(`tel:${phone}`, "_self")
-                            }}
-                          />
-                          <EnvelopeIcon
-                            className="icon"
-                            onClick={() => {
-                              window.open(`sms:${phone}`, "_self")
-                            }}
-                          />
-                        </div>
-                      </Fragment>
-                    ),
-                  )}
-                </div>
-                <div className="contact-info">
-                  {BRIDE_INFO.filter(({ phone }) => !!phone).map(
+                  {FAMILY_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
                       <Fragment key={relation}>
                         <div className="relation">{relation}</div>

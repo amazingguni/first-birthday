@@ -1,9 +1,10 @@
 import {
-  BRIDE_FULLNAME,
-  GROOM_FULLNAME,
+  BABY_NAME,
+  FATHER_NAME,
+  MOTHER_NAME,
   LOCATION,
-  WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
+  EVENT_DATE,
+  EVENT_DATE_FORMAT,
 } from "../../const"
 import { COVER_IMAGE } from "../../images"
 import { LazyDiv } from "../lazyDiv"
@@ -22,25 +23,23 @@ export const Cover = () => {
   return (
     <LazyDiv className="card cover">
       <div className="wedding-date">
-        {WEDDING_DATE.format("YYYY")}
+        {EVENT_DATE.format("YYYY")}
         <div className="divider" />
-        {WEDDING_DATE.format("MM")}
+        {EVENT_DATE.format("MM")}
         <div className="divider" />
-        {WEDDING_DATE.format("DD")}
+        {EVENT_DATE.format("DD")}
       </div>
       <div className="wedding-day-of-week">
-        {DAY_OF_WEEK[WEDDING_DATE.day()]}
+        {DAY_OF_WEEK[EVENT_DATE.day()]}
       </div>
       <div className="image-wrapper">
         <img src={COVER_IMAGE} alt="sample" />
       </div>
-      <div className="subtitle">Save the date for the wedding of</div>
+      <div className="subtitle">현서의 첫 번째 생일</div>
       <div className="names">
-        {GROOM_FULLNAME}
-        <div className="divider" />
-        {BRIDE_FULLNAME}
+        {FATHER_NAME} · {MOTHER_NAME}의 딸 {BABY_NAME}
       </div>
-      <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
+      <div className="info">{EVENT_DATE.format(EVENT_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
     </LazyDiv>
   )

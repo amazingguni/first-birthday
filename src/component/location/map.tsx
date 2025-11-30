@@ -9,7 +9,7 @@ import {
   KMAP_PLACE_ID,
   LOCATION,
   NMAP_PLACE_ID,
-  WEDDING_HALL_POSITION,
+  EVENT_LOCATION_POSITION,
 } from "../../const"
 import { NAVER_MAP_CLIENT_ID } from "../../env"
 
@@ -39,11 +39,11 @@ const NaverMap = () => {
   useEffect(() => {
     if (naver) {
       const map = new naver.maps.Map(ref.current, {
-        center: WEDDING_HALL_POSITION,
+        center: EVENT_LOCATION_POSITION,
         zoom: 17,
       })
 
-      new naver.maps.Marker({ position: WEDDING_HALL_POSITION, map })
+      new naver.maps.Marker({ position: EVENT_LOCATION_POSITION, map })
 
       return () => {
         map.destroy()
@@ -129,8 +129,8 @@ const NaverMap = () => {
                 if (kakao)
                   kakao.Navi.start({
                     name: LOCATION,
-                    x: WEDDING_HALL_POSITION[0],
-                    y: WEDDING_HALL_POSITION[1],
+                    x: EVENT_LOCATION_POSITION[0],
+                    y: EVENT_LOCATION_POSITION[1],
                     coordType: "wgs84",
                   })
                 break
@@ -152,8 +152,8 @@ const NaverMap = () => {
               case "ios":
               case "android": {
                 const params = new URLSearchParams({
-                  goalx: WEDDING_HALL_POSITION[0].toString(),
-                  goaly: WEDDING_HALL_POSITION[1].toString(),
+                  goalx: EVENT_LOCATION_POSITION[0].toString(),
+                  goaly: EVENT_LOCATION_POSITION[1].toString(),
                   goalName: LOCATION,
                 })
                 window.open(`tmap://route?${params.toString()}`, "_self")

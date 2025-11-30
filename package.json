@@ -1,11 +1,11 @@
 {
-  "name": "wedding-invitation",
+  "name": "first-birthday",
   "version": "0.1.0",
-  "description": "A wedding invitation web page template",
-  "author": "Ju Ho Nam <jhnamnam@gmail.com> (https://juhonamnam.github.io/)",
+  "description": "A hyunseo's first birthday invitation web page template",
+  "author": "Younggun Na <amazingguni@gmail.com> (https://amazingguni.github.io/)",
   "license": "MIT",
   "private": true,
-  "homepage": "https://juhonamnam.github.io/wedding-invitation",
+  "homepage": "https://amazingguni.github.io/first-birthday",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

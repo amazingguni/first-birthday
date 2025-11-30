@@ -1,11 +1,12 @@
 import {
-  BRIDE_FULLNAME,
-  GROOM_FULLNAME,
+  FATHER_NAME,
+  MOTHER_NAME,
+  BABY_NAME,
   LOCATION,
   SHARE_ADDRESS,
   SHARE_ADDRESS_TITLE,
-  WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
+  EVENT_DATE,
+  EVENT_DATE_FORMAT,
 } from "../../const"
 import ktalkIcon from "../../icons/ktalk-icon.png"
 import { LazyDiv } from "../lazyDiv"
@@ -29,9 +30,9 @@ export const ShareButton = () => {
             address: SHARE_ADDRESS,
             addressTitle: SHARE_ADDRESS_TITLE,
             content: {
-              title: `${GROOM_FULLNAME} ❤️ ${BRIDE_FULLNAME}의 결혼식에 초대합니다.`,
+              title: `${FATHER_NAME}·${MOTHER_NAME}의 아기 ${BABY_NAME}의 첫 번째 생일에 초대합니다.`,
               description:
-                WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
+                EVENT_DATE.format(EVENT_DATE_FORMAT) + "\n" + LOCATION,
               imageUrl:
                 window.location.protocol +
                 "//" +
