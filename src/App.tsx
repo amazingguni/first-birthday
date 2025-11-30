@@ -8,7 +8,6 @@ import { Gallery } from "./component/gallery"
 import { Information } from "./component/information"
 import { GuestBook } from "./component/guestbook"
 import { LazyDiv } from "./component/lazyDiv"
-import { ShareButton } from "./component/shareButton"
 import { STATIC_ONLY } from "./env"
 
 function App() {
@@ -36,8 +35,6 @@ function App() {
           {/* 오시는길 */}
           <Location />
         </LazyDiv>
-        
-        <ShareButton />
       </div>
     </div>
   )
